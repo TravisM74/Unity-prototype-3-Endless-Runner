@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -6,6 +7,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject obstaclePrefab;
+    public List<GameObject> obsticles;
 
     // create a player controller variable
     private PlayerController playerCotrollerScript;
@@ -27,8 +29,9 @@ public class SpawnManager : MonoBehaviour
     }
 
     private void SpawnObstacle(){
-        if (playerCotrollerScript.gameOver == false){
-            Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
+        if (playerCotrollerScript.gameOver == false && !playerCotrollerScript.IsIntro){
+            int index = Random.Range(0,obsticles.Count );
+            Instantiate(obsticles[index], spawnPos, obstaclePrefab.transform.rotation);
         }
     }
 }
